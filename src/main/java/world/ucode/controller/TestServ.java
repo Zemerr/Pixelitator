@@ -1,4 +1,4 @@
-package world.ucode;
+package world.ucode.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -16,6 +16,7 @@ import java.io.OutputStream;
 import java.nio.file.Paths;
 
 import org.apache.commons.codec.binary.Base64;
+import world.ucode.model.Picures;
 
 
 
@@ -26,7 +27,8 @@ public class TestServ extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        super.doGet(req, resp);
-        //resp.getWriter().write("mazafaka");
+        response.getWriter().write("mazafaka");
+
         //resp.get
         System.out.println("\n\nloliata\n\n");
         //response
@@ -34,19 +36,23 @@ public class TestServ extends HttpServlet {
 //        String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
 //        System.out.println("after desc");
 //
-        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-        System.out.println("after part " + filePart);
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        System.out.println("after filename");
-        InputStream fileContent = filePart.getInputStream();
-
-
-        byte[] imageBytes = new byte[(int)filePart.getSize()];
-        fileContent.read(imageBytes, 0, imageBytes.length);
-        fileContent.close();
-        String imageStr = Base64.encodeBase64String(imageBytes);
-
-        System.out.println(imageStr);
+//        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+//        System.out.println("after part " + filePart);
+//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+//        System.out.println("after filename");
+//        InputStream fileContent = filePart.getInputStream();
+//
+//
+//        byte[] imageBytes = new byte[(int)filePart.getSize()];
+//        fileContent.read(imageBytes, 0, imageBytes.length);
+//        fileContent.close();
+//        String imageStr = Base64.encodeBase64String(imageBytes);
+//
+//        System.out.println(imageStr);
+//
+//        Picures pic = new Picures();
+//        pic.setBase64Image(imageStr);
+//        request.setAttribute("pic", pic);
 //
 //        OutputStream out = response.getOutputStream();
 //
@@ -62,10 +68,10 @@ public class TestServ extends HttpServlet {
 //        System.out.println("description = " + description);
 //        System.out.println("filename = " + fileName);
 //        System.out.println(fileContent);
-        String path = "index.jsp";
+      //  String path = "/jsp/hello.jsp";
         //ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        requestDispatcher.forward(request, response);
+      //  RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
+        //requestDispatcher.forward(request, response);
 
         System.out.println("\n\nloliata end\n\n");
 

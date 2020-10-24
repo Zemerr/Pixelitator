@@ -7,10 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
 <body>
-HELLO
+<div align="center">
+    <h2><c:out value="lol" /></h2>
+    <h3><c:out value="pic" /></h3>
+    <img src="data:image/jpg;base64,${pic.base64Image}" width="240" height="300"/>
+</div>
 </body>
 </html>

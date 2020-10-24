@@ -9,7 +9,7 @@
 <!--    </welcome-file-list>-->
 <!--    <servlet>-->
 <!--        <servlet-name>TestServ</servlet-name>-->
-<!--        <servlet-class>world.ucode.TestServ</servlet-class>-->
+<!--        <servlet-class>world.ucode.controller.TestServ</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--        <servlet-name>TestServ</servlet-name>-->
