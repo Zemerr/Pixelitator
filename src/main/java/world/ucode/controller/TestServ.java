@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Paths;
 
+import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import world.ucode.model.Picures;
 
@@ -24,72 +22,36 @@ import world.ucode.model.Picures;
 @WebServlet("/upload")
 @MultipartConfig
 public class TestServ extends HttpServlet {
+    private Gson gson = new Gson();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        super.doGet(req, resp);
-        response.getWriter().write("mazafaka");
 
-        //resp.get
-        System.out.println("\n\nloliata\n\n");
-        //response
+        Part filePart = request.getPart("file");
+        InputStream fileContent = null;
+        PrintWriter out = null;
+        String imageStr = null;
 
-//        String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
-//        System.out.println("after desc");
-//
-//        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-//        System.out.println("after part " + filePart);
-//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-//        System.out.println("after filename");
-//        InputStream fileContent = filePart.getInputStream();
-//
-//
-//        byte[] imageBytes = new byte[(int)filePart.getSize()];
-//        fileContent.read(imageBytes, 0, imageBytes.length);
-//        fileContent.close();
-//        String imageStr = Base64.encodeBase64String(imageBytes);
-//
-//        System.out.println(imageStr);
-//
-//        Picures pic = new Picures();
-//        pic.setBase64Image(imageStr);
-//        request.setAttribute("pic", pic);
-//
-//        OutputStream out = response.getOutputStream();
-//
-//        // Copy the contents of the file to the output stream
-//        byte[] buf = new byte[1024];
-//        int count = 0;
-//        while ((count = fileContent.read(buf)) >= 0) {
-//            out.write(buf, 0, count);
-//        }
-//        out.close();
-//        fileContent.close();
-//
-//        System.out.println("description = " + description);
-//        System.out.println("filename = " + fileName);
-//        System.out.println(fileContent);
-      //  String path = "/jsp/hello.jsp";
-        //ServletContext servletContext = getServletContext();
-      //  RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-        //requestDispatcher.forward(request, response);
-
-        System.out.println("\n\nloliata end\n\n");
+        if (filePart!=null) {
+            fileContent = filePart.getInputStream();
+            out = response.getWriter();
 
 
+            byte[] imageBytes = new byte[(int)filePart.getSize()];
+            if (fileContent != null) {
+                fileContent.read(imageBytes, 0, imageBytes.length);
+                fileContent.close();
+                imageStr = Base64.encodeBase64String(imageBytes);
+                System.out.println(imageStr);
+            }
+            Picures pic = new Picures();
+            pic.setBase64Image(imageStr);
+            String jsonstring = gson.toJson(pic);
 
-
-//        for (Part part : request.getParts()) {
-//            String fileName = getFileName(part);
-//            System.out.println(fileName);
-//            //part.write(uploadPath + File.separator + fileName);
-//        }
-//    }
-//
-//    private String getFileName(Part part) {
-//        for (String content : part.getHeader("content-disposition").split(";")) {
-//            if (content.trim().startsWith("filename"))
-//                return content.substring(content.indexOf("=") + 2, content.length() - 1);
-//        }
-//        return null;
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.print(jsonstring);
+            out.close();
+        }
     }
 }

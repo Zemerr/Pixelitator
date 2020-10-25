@@ -11,6 +11,7 @@
         <title>Pixelizator</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
     <body>
         <div class="head">
@@ -19,9 +20,9 @@
         <div style="width: 100%;">
             <div class="picone" style="width: 40%; float: left">
                 <img id="myImage" class="pic" src="", alt="LOAD YOUR PHOTO">
-
             </div >
             <div class="pictwo" style="width: 40%; margin-left: 55%;">
+                <img id="pixelizated" class="pic" src="", alt="PIXALIZATED PHOTO">
             </div>
         </div>
 
@@ -30,11 +31,11 @@
 
 
 
-<form action="upload" method="post" enctype="multipart/form-data" name="fileinfo">
-    <div>
-        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-        <input type="file" id="image_uploads" name="file" accept=".jpg, .jpeg, .png" multiple>
-    </div>
+<form action="upload" method="post" enctype="multipart/form-data" name="fileinfo" id="submitform">
+<%--    <div>--%>
+        <label for="fileUploader">Choose images to upload (PNG, JPG)</label>
+        <input type="file" id="fileUploader" name="file" accept=".jpg, .jpeg, .png" multiple required>
+<%--    </div>--%>
     <div class="preview">
         <p>No files currently selected for upload</p>
     </div>
@@ -44,5 +45,6 @@
 </form>
 
 <script src="js/script.js"></script>
+    <script src="js/response.js"></script>
     </body>
 </html>

@@ -1,24 +1,28 @@
-var form = document.forms.namedItem("fileinfo");
-form.action("/upload")
-form.addEventListener('submit', function(ev) {
+var imged = document.getElementById("pixelizated");
 
-   // var oOutput = document.querySelector("div"),
-        oData = new FormData(form);
+$(document).ready(function() {
+    $('form').submit(function(event) {
+        event.preventDefault();
 
-    oData.append("CustomField", "This is some extra data");
+        // Calling AJAX
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : new FormData(this),
+            contentType : false,
+            cache : false,
+            processData : false,
+            dataType: 'json',
+            success : function(response) {
+                console.log("YES");
+                console.log(response);
+                console.log(response.base64Image);
+                imged.setAttribute("src", "data:image/jpg;base64,"+ response.base64Image)
 
-    var oReq = new XMLHttpRequest();
-    oReq.open("POST", "/upload", true);
-    oReq.onload = function(oEvent) {
-        if (oReq.status == 200) {
-            console.log("YES");
-           // oOutput.innerHTML = "Uploaded!";
-        } else {
-            console.log("no");
-           // oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
-        }
-    };
+            }
+        });
 
-    oReq.send(oData);
-    ev.preventDefault();
-}, false);
+        return false;
+    });
+
+});
