@@ -21,7 +21,7 @@ import world.ucode.model.Picures;
 
 @WebServlet("/upload")
 @MultipartConfig
-public class TestServ extends HttpServlet {
+public class Uploadserv extends HttpServlet {
     private Gson gson = new Gson();
 
     @Override
@@ -52,6 +52,7 @@ public class TestServ extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             out.print(jsonstring);
             out.close();
+
         }
     }
 }
