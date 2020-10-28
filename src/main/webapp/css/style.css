@@ -2,7 +2,9 @@
     font-family: myFirstFont;
     src: url("../font/myfont.TTF");
 }
-
+/*input[type="file"] {*/
+/*    display: none;*/
+/*}*/
 body {
 
     background: url("../image/back7.jpg") no-repeat;
@@ -20,17 +22,17 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     padding: 0.3em 0.6em ;
-    margin: 30px auto;
+    margin: 20px auto;
     text-align: center;
 }
 
 .picone {
-    height: 60%;
+    height: 50%;
     border: 3px solid transparent;
     border-image: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
     border-image-slice: 1;
     background: #bdc8c8;
-    margin: 0px 5%;
+    margin: 0px 10%;
     position: relative;
     /*float: left;*/
 
@@ -46,7 +48,7 @@ body {
 }
 
 .pictwo {
-    height: 60%;
+    height: 50%;
     border: 3px solid transparent;
     border-image: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
     border-image-slice: 1;
@@ -63,5 +65,78 @@ body {
     max-width: 100%;
     max-height: 100%;
 }
+
+.forform {
+    /*padding: 50px 50px;*/
+    margin: 20px 50px;
+
+    /*font-size: 20px;*/
+    /*background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);*/
+    /*-webkit-background-clip: text;*/
+    /*-webkit-text-fill-color: transparent;*/
+    /*padding: 0.3em 0.6em ;*/
+    text-align: center;
+}
+
+.forformelem {
+    /*padding: 50px 50px;*/
+    /*margin: 50px 50px;*/
+
+    font-size: 20px;
+    background: linear-gradient(135deg, #a3bc12 20%, #ea0efa 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0.3em 0.6em ;
+    text-align: center;
+}
+
+.choiceNumber {
+    display: inline-block;
+    width: 30%;
+    height: 5vh;
+    line-height: 2vh;
+    font-size: 3vh;
+    border: none;
+}
+
+.text {
+    background: linear-gradient(135deg, #a3bc12 20%, #ea0efa 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+}
+
+.button {
+    /*background-color: #4CAF50; !* Green *!*/
+    border: none;
+    color: #041edb;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #12BCB0 20%, #FABE0E 70%);
+    border-image-slice: 1;
+}
+
+/*input[type=file] {*/
+/*    display:none;*/
+/*    margin:10px;*/
+/*}*/
+/*input[type=file] + label {*/
+/*    display:inline-block;*/
+/*    margin:20px;*/
+/*    padding: 4px 32px;*/
+/*    background-color: #FFFFFF;*/
+/*    border:solid 1px #666F77;*/
+/*    border-radius: 6px;*/
+/*    color:#666F77;*/
+/*}*/
+/*input[type=file]:active + label {*/
+/*    background-image: none;*/
+/*    background-color:#2D6C7A;*/
+/*    color:#FFFFFF;*/
+/*}*/
 
 

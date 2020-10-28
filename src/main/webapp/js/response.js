@@ -8,6 +8,9 @@ $(document).ready(function() {
         $.ajax({
             url : $(this).attr('action'),
             type : $(this).attr('method'),
+            beforeSend: function(request) {
+                request.setRequestHeader("Authority", "test");
+            },
             data : new FormData(this),
             contentType : false,
             cache : false,

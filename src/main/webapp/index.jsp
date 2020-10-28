@@ -17,34 +17,40 @@
         <div class="head">
             <h1 style="color:#d7782f;">PIXELIZATOR ONLINE</h1>
         </div>
+        <form action="upload" method="post" enctype="multipart/form-data" name="fileinfo" id="submitform" class="forform">
+            <div>
+                <label class="forformelem " name="UPLOAD" for="fileUploader">Choose images to upload (PNG, JPG)</label>
+                <input type="file" value="upload" id="fileUploader" name="file" accept=".jpg, .jpeg, .png">
+            </div>
+            <br>
+            <div>
+                <input type="range" class="choiceNumber" id="inputNumber" min="1" max="100"  value="10">
+            </div>
+            <p class="text">Block size: </p>
+            <p class="text" id="outNumber">10</p>
+            <div>
+                <button class="button">Submit</button>
+            </div>
+        </form>
         <div style="width: 100%;">
-            <div class="picone" style="width: 40%; float: left">
+            <div class="picone" style="width: 30%; float: left">
                 <img id="myImage" class="pic" src="", alt="LOAD YOUR PHOTO">
             </div >
-            <div class="pictwo" style="width: 40%; margin-left: 55%;">
+            <div class="pictwo" style="width: 30%; margin-left: 60%;">
                 <img id="pixelizated" class="pic" src="", alt="PIXALIZATED PHOTO">
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
 
 
 
 
-
-<form action="upload" method="post" enctype="multipart/form-data" name="fileinfo" id="submitform">
-<%--    <div>--%>
-        <label for="fileUploader">Choose images to upload (PNG, JPG)</label>
-        <input type="file" id="fileUploader" name="file" accept=".jpg, .jpeg, .png" multiple required>
-<%--    </div>--%>
-    <div class="preview">
-        <p>No files currently selected for upload</p>
-    </div>
-    <div>
-        <button>Submit</button>
-    </div>
-</form>
-
-<script src="js/script.js"></script>
-    <script src="js/response.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/response.js"></script>
     </body>
 </html>

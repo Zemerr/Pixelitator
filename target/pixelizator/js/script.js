@@ -46,3 +46,7 @@ function returnFileSize(number) {
         return (number/1048576).toFixed(1) + 'MB';
     }
 }
+
+document.getElementById("inputNumber").addEventListener('mousemove', function () {
+    document.getElementById("outNumber").textContent = document.getElementById("inputNumber").value
+})

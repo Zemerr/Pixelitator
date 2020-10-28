@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 
@@ -29,24 +31,57 @@ public class Testpic {
 //        }
 //        ImageIO.write(img, "png", new File("apple50.png"));
 
-        try
-        {
-            ImageIcon ii = new ImageIcon("./slack-imgs.png");
+//        try
+//        {
+//            ImageIcon ii = new ImageIcon("./slack-imgs.png");
+//
+//            BufferedImage bi = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
+//            Graphics2D g2d = (Graphics2D)bi.createGraphics();
+//            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING,
+//                    RenderingHints.VALUE_RENDER_QUALITY));
+//
+//            boolean b = g2d.drawImage(ii.getImage(), 0, 0, 50, 50, null);
+//            System.out.println(b);
+//
+//            ImageIO.write(bi, "png", new File("apple50.png"));
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
 
-            BufferedImage bi = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2d = (Graphics2D)bi.createGraphics();
-            g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING,
-                    RenderingHints.VALUE_RENDER_QUALITY));
+        final int PIX_SIZE = 10;
 
-            boolean b = g2d.drawImage(ii.getImage(), 0, 0, 50, 50, null);
-            System.out.println(b);
+// Read the file as an Image
+        BufferedImage img = ImageIO.read(new File("./slack-imgs.png"));
 
-            ImageIO.write(bi, "png", new File("apple50.png"));
+// Get the raster data (array of pixels)
+        Raster src = img.getData();
+
+// Create an identically-sized output raster
+        WritableRaster dest = src.createCompatibleWritableRaster();
+
+// Loop through every PIX_SIZE pixels, in both x and y directions
+        for(int y = 0; y < src.getHeight(); y += PIX_SIZE) {
+            for(int x = 0; x < src.getWidth(); x += PIX_SIZE) {
+
+                // Copy the pixel
+                double[] pixel = new double[4];
+                pixel = src.getPixel(x, y, pixel);
+
+                // "Paste" the pixel onto the surrounding PIX_SIZE by PIX_SIZE neighbors
+                // Also make sure that our loop never goes outside the bounds of the image
+                for(int yd = y; (yd < y + PIX_SIZE) && (yd < dest.getHeight()); yd++) {
+                    for(int xd = x; (xd < x + PIX_SIZE) && (xd < dest.getWidth()); xd++) {
+                        dest.setPixel(xd, yd, pixel);
+                    }
+                }
+            }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+
+// Save the raster back to the Image
+        img.setData(dest);
+        ImageIO.write(img, "png", new File("apple50.png"));
     }
 
     public static void main(String []args) throws IOException {
