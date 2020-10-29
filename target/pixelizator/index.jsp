@@ -26,6 +26,7 @@
             <div>
                 <input type="range" class="choiceNumber" id="inputNumber" min="1" max="100"  value="10">
             </div>
+
             <p class="text">Block size: </p>
             <p class="text" id="outNumber">10</p>
             <div>
@@ -36,7 +37,7 @@
             <div class="picone" style="width: 30%; float: left">
                 <img id="myImage" class="pic" src="", alt="LOAD YOUR PHOTO">
             </div >
-            <div class="pictwo" style="width: 30%; margin-left: 60%;">
+            <div id="myImagepix" class="pictwo" style="width: 30%; margin-left: 60%;">
                 <img id="pixelizated" class="pic" src="", alt="PIXALIZATED PHOTO">
             </div>
         </div>
@@ -45,12 +46,22 @@
         <br>
         <br>
         <br>
+        <div class="forform">
+            <a href="#" id="downloadLinkjpg" download="pixImage.jpg"></a>
+            <button disabled="disabled" id="downjpg" class="button">Download<br>JPG</button>
 
+            <a href="#" id="downloadLinkpng" download="pixImage.png"></a>
+            <button disabled="disabled" id="downpng" class="button">Download<br>PNG</button>
+
+            <a href="#" id="downloadLinkbmp" download="pixImage.bmp"></a>
+            <button disabled="disabled" id="downbmp" class="button">Download<br>BMP</button>
+        </div>
 
 
 
 
         <script src="js/script.js"></script>
         <script src="js/response.js"></script>
+        <script src="js/download.js"></script>
     </body>
 </html>

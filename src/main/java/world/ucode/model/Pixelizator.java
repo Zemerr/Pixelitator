@@ -15,19 +15,22 @@ import java.io.InputStream;
 
 public class Pixelizator {
 
-    InputStream fileContent = null;
-    String imageStr = null;
-    Picures pic = null;
-    BufferedImage img = null;
-    byte[] bytes = null;
+    private InputStream fileContent = null;
+    private String imageStr = null;
+    private Picures pic = null;
+    private BufferedImage img = null;
+    private byte[] bytes = null;
+    private int pixsize = 1;
+    private String format;
 
 
-    public Pixelizator(Part filePart) throws IOException {
+    public Pixelizator(Part filePart, String pixsize, String format) throws IOException {
         fileContent = filePart.getInputStream();
-        //byte[] imageBytes = new byte[(int)filePart.getSize()];
+        this.format = format;
+        this.pixsize = Integer.parseInt(pixsize);
+
+
         if (fileContent != null) {
-          //  fileContent.read(imageBytes, 0, imageBytes.length);
-          //  fileContent.close();
             Pixlate();
             imageStr = Base64.encodeBase64String(bytes);
         }
@@ -40,22 +43,17 @@ public class Pixelizator {
     }
 
     private void Pixlate() throws IOException {
-        final int PIX_SIZE = 50;
         img = ImageIO.read(fileContent);
-
-
         Raster src = img.getData();
-
-
         WritableRaster dest = src.createCompatibleWritableRaster();
 
-        for (int y = 0; y < src.getHeight(); y += PIX_SIZE) {
-            for (int x = 0; x < src.getWidth(); x += PIX_SIZE) {
+        for (int y = 0; y < src.getHeight(); y += pixsize) {
+            for (int x = 0; x < src.getWidth(); x += pixsize) {
                 // Copy the pixel
                 double[] pixel = new double[4];
                 pixel = src.getPixel(x, y, pixel);
-                for (int yd = y; (yd < y + PIX_SIZE) && (yd < dest.getHeight()); yd++) {
-                    for (int xd = x; (xd < x + PIX_SIZE) && (xd < dest.getWidth()); xd++) {
+                for (int yd = y; (yd < y + pixsize) && (yd < dest.getHeight()); yd++) {
+                    for (int xd = x; (xd < x + pixsize) && (xd < dest.getWidth()); xd++) {
                         dest.setPixel(xd, yd, pixel);
                     }
                 }
@@ -63,7 +61,7 @@ public class Pixelizator {
         }
         img.setData(dest);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(img, "png", baos);
+        ImageIO.write(img, format, baos);
         bytes = baos.toByteArray();
     }
 }

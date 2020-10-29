@@ -9,7 +9,11 @@ $(document).ready(function() {
             url : $(this).attr('action'),
             type : $(this).attr('method'),
             beforeSend: function(request) {
+                let str = document.getElementById('fileUploader').value.split('.');
                 request.setRequestHeader("Authority", "test");
+                request.setRequestHeader("Size", document.getElementById("inputNumber").value);
+                request.setRequestHeader("Format", str[str.length - 1]);
+
             },
             data : new FormData(this),
             contentType : false,
@@ -17,10 +21,15 @@ $(document).ready(function() {
             processData : false,
             dataType: 'json',
             success : function(response) {
-                console.log("YES");
-                console.log(response);
-                console.log(response.base64Image);
                 imged.setAttribute("src", "data:image/jpg;base64,"+ response.base64Image)
+                butjpg.disabled = false;
+                butbmp.disabled = false;
+                butpng.disabled = false;
+                butjpg.style.opacity = 1;
+                butpng.style.opacity = 1;
+                butbmp.style.opacity = 1;
+                console.log("allable");
+
 
             }
         });

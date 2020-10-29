@@ -1,13 +1,22 @@
 var input = document.querySelector('input');
 // var preview = document.querySelector('.preview');
 var img = document.getElementById("myImage");
+input.addEventListener('change', updateImageDisplay);
 
 //input.style.opacity = 0;
 
-input.addEventListener('change', updateImageDisplay);
+
 
 
 function updateImageDisplay() {
+
+    butjpg.disabled = true;
+    butbmp.disabled = true;
+    butpng.disabled = true;
+    butjpg.style.opacity = 0;
+    butpng.style.opacity = 0;
+    butbmp.style.opacity = 0;
+    imged.setAttribute("src", "#");
 
     var curFiles = input.files;
     if(curFiles.length === 0) {
@@ -46,6 +55,18 @@ function returnFileSize(number) {
         return (number/1048576).toFixed(1) + 'MB';
     }
 }
+
+// function updateImageDisplay() {
+//     butjpg.disabled = true;
+//     butbmp.disabled = true;
+//     butpng.disabled = true;
+//     butjpg.style.opacity = 0;
+//     butpng.style.opacity = 0;
+//     butbmp.style.opacity = 0;
+//     imged.setAttribute("src", null);
+//     console.log("notallable");
+//
+// }
 
 document.getElementById("inputNumber").addEventListener('mousemove', function () {
     document.getElementById("outNumber").textContent = document.getElementById("inputNumber").value

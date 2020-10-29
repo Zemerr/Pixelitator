@@ -29,21 +29,14 @@ public class Uploadserv extends HttpServlet {
 
         Part filePart = request.getPart("file");
         PrintWriter out;
+        String pixSize = request.getHeader("Size");
+        String format = request.getHeader("Format");
 
-        Enumeration<String> headerNames = request.getHeaderNames();
-        //request.getHeaders();
-        //Enumeration<String> header= request.getHeaders();
 
-        if (headerNames != null) {
-            while (headerNames.hasMoreElements()) {
-                String headerName = headerNames.nextElement();
-                System.out.println("Header: " + headerName + " "+ request.getHeader(headerName));
-            }
-        }
-
-        if (filePart!=null) {
+        if (filePart!=null && pixSize != null && format != null) {
             out = response.getWriter();
-            Pixelizator pixelizator = new Pixelizator(filePart);
+
+            Pixelizator pixelizator = new Pixelizator(filePart, pixSize, format);
             String jsonstring = gson.toJson(pixelizator.getPic());
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
